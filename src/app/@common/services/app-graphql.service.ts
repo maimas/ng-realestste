@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {gql} from '@apollo/client/core';
 import {Apollo, QueryRef} from 'apollo-angular';
-import {QueryFindPropertyByIdArgs} from '../../@generated/app-graphql-models';
+import {QueryFindAllPropertiesArgs, QueryFindPropertyByIdArgs} from '../../@generated/app-graphql-models';
 
 @Injectable()
 export class AppGraphqlService {
@@ -13,6 +13,19 @@ export class AppGraphqlService {
       .watchQuery({
         query: gql`query findPropertyById($id:String!){
                      findPropertyById(id:$id){
+                        ${PROPERTY_FRAGMENT.NAME}
+                      }
+                    }
+               ${PROPERTY_FRAGMENT.VALUE}`,
+        variables: args
+      });
+  }
+
+  getAllProperties(args: QueryFindAllPropertiesArgs): QueryRef<QueryFindAllPropertiesArgs> {
+    return this.apollo
+      .watchQuery({
+        query: gql`query findAllProperties($offset:Int!, $limit:Int){
+                     findAllProperties(offset:$offset, limit:$limit){
                         ${PROPERTY_FRAGMENT.NAME}
                       }
                     }

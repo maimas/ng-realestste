@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Property} from '../../@generated/app-graphql-models';
 import {AppGraphqlService} from '../../@common/services/app-graphql.service';
+import {timeout} from 'rxjs/operators';
 
 
 @Component({
@@ -17,11 +18,11 @@ export class PropertiesListingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiService.getPropertyById({id: '5f756cf298cbdf032f87b886'})
+    this.apiService.getAllProperties({offset: 0, limit: 100})
       .valueChanges.subscribe(result => {
       // @ts-ignore
-      const property = result.data && result.data.findPropertyById;
-      this.properties.push(property);
+      const properties: Property[] = result.data && result.data.findAllProperties;
+      this.properties.push(...properties);
 
       this.loading = result.loading;
       // this.error = result.error;

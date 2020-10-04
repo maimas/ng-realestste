@@ -1,42 +1,37 @@
 <mat-card class="wrapper">
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
-  <div class="bottom-info" fxLayout="column">
-    <div fxLayout="row" fxLayoutAlign="space-between">
-      <div id="price"> {{600000 | currency:'USD':'symbol':'3.0' }}</div>
-      <div id="type">{{property?.buildingType}}</div>
-      <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <!--      <mat-icon>favorite</mat-icon>-->
+  <ng-container *ngIf="!property">
+    <div fxLayout="row" fxLayoutAlign="center center" fxFill>
+      <mat-spinner [diameter]="25"></mat-spinner>
     </div>
-    <div fxLayout="row" fxLayoutAlign="space-between" class="stats">
-      <div id="totalRooms" fxLayout="row" class="mr-14">
-        <mat-icon>house</mat-icon>
-        <div>2 Beds</div>
-      </div>
-      <div id="totalBathRooms" fxLayout="row" class="mr-14">
-        <mat-icon>bathtub</mat-icon>
-        <div>1 Baths</div>
-      </div>
+  </ng-container>
 
-      <div id="totalSize" fxLayout="row" class="mr-1">
-        <mat-icon>square_foot</mat-icon>
+  <ng-container *ngIf="property">
+    <!--        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">-->
+    <img mat-card-image [src]="thumbnail">
+
+    <div class="favorite">
+      <button mat-icon-button [color]="favorite ? 'warn' : 'primary'">
+        <mat-icon>{{favorite ? 'favorite' : 'favorite_border'}}</mat-icon>
+      </button>
+    </div>
+
+    <div class="bottom-info">
+      <div class="stats" fxLayout="row" fxLayoutAlign="space-between center">
+        <div id="price"> {{600000 | currency:'USD':'symbol':'3.0' }}</div>
+        <div>2 Beds</div>
+        <div>|</div>
+        <div>1 Baths</div>
+        <div>|</div>
         <div>70 m2</div>
       </div>
+      <div fxLayout="row" fxLayoutAlign="start">
+        <div class="address">19224 5th Dr SE, Bothell, WA 98012</div>
+      </div>
 
-
-      <!--      <div id="totalRooms">{{property?.totalRooms}}</div>-->
-      <!--      <div id="totalBathRooms">{{property?.totalRooms}}</div>-->
-      <!--      <div id="totalSize">{{property?.totalSize}}</div>-->
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div>Apartment for rent</div>
+        <div class="date-time">{{property.createdOn | timeago}}</div>
+      </div>
     </div>
-    <div>
-      <div id="address">19224 5th Dr SE, Bothell, WA 98012</div>
-    </div>
-
-
-    <!--  <div>{{property?.listing?.price | currency:property?.listing?.currency }}</div>-->
-
-  </div>
-
-
+  </ng-container>
 </mat-card>

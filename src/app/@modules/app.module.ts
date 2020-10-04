@@ -11,6 +11,7 @@ import {HeaderComponent} from '../header/header.component';
 import {FooterComponent} from '../footer/footer.component';
 import {AppContentModule} from '../content/content.module';
 import {CommonModule} from '@angular/common';
+import {TimeagoModule} from 'ngx-timeago';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {CommonModule} from '@angular/common';
     BrowserAnimationsModule,
     HttpClientModule,
     CommonModule,
+    TimeagoModule.forRoot(),
     AppRoutingModule,
     AppMaterialModule,
     AppGraphqlModule,

@@ -4,11 +4,11 @@ schema:
       headers:
         Authorization: YOUR-TOKEN-HERE
 generates:
-  src/app/@generated/graphql-models.ts:
+  src/app/@generated/app-graphql-models.ts:
     plugins:
       - "typescript"
       - "typescript-operations"
       - "typescript-apollo-angular"
-  src/@api/generated/graphql.schema.json:
+  src/app/@generated/app-graphql.schema.json:
     plugins:
       - "introspection"
