@@ -1,0 +1,48 @@
+.wrapper {
+  width: 280px;
+  height: 240px;
+  margin: 0;
+  padding: 0;
+  background: #FFF;
+  border-bottom: 4px solid #006AFF;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
+  cursor: pointer;
+
+  .bottom-info {
+    margin-top: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
+    text-transform: capitalize;
+
+    .address {
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    #price {
+      font-size: 1.125rem;
+      color: #333;
+      font-weight: 600;
+    }
+    #totalSize{
+      text-transform: lowercase;
+    }
+
+    .stats{
+      mat-icon{
+        color: #bfbfbf;
+      }
+    }
+  }
+
+}
+
+mat-card img {
+  object-fit: cover;
+  width: 100%;
+  height: 70%;
+  margin: 0;
+  padding: 0;
+}
+

@@ -1,0 +1,14 @@
+overwrite: true
+schema:
+  - http://localhost:8087/graphql:
+      headers:
+        Authorization: YOUR-TOKEN-HERE
+generates:
+  src/app/@generated/app-graphql-models.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-apollo-angular"
+  src/app/@generated/app-graphql.schema.json:
+    plugins:
+      - "introspection"

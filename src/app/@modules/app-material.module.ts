@@ -43,6 +43,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {FlexModule} from '@angular/flex-layout';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   exports: [
@@ -92,7 +93,8 @@ import {FlexModule} from '@angular/flex-layout';
     OverlayModule,
     PortalModule,
     ScrollingModule,
-    FlexModule
+    FlexModule,
+    CommonModule,
   ]
 })
 export class AppMaterialModule {

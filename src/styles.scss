@@ -1,4 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import "app/@common/styles/shared-styles";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.default-theme {
+  background-color: #24292e;
+  color: white;
+}
+
+.app-page {
+  .wrapper {
+    height: 100vh;
+    display: flex;
+    /* Direction of the items, can be row or column */
+    flex-direction: column;
+  }
+
+  header {
+    height: 50px;
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+  }
+
+  footer {
+    min-height: 30px;
+
+    app-footer {
+      min-width: 100% !important;
+    }
+  }
+
+  main {
+    padding-top: 10px;
+    flex: 1;
+  }
+}
