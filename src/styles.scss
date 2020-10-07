@@ -22,6 +22,20 @@ body {
     /* Direction of the items, can be row or column */
     flex-direction: column;
   }
+  .wrapper::after {
+    content: "";
+    background-image: url(assets/images/defaults/bg.jpg);
+    opacity: 0.05;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
 
   header {
     height: 50px;

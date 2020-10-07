@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Property} from '../../../@generated/app-graphql-models';
-import {DomSanitizer, SafeHtml, SafeResourceUrl} from '@angular/platform-browser';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-property-card',
@@ -11,9 +12,10 @@ export class PropertyCardComponent implements OnInit {
 
   @Input() property: Property;
   @Input() favorite = false;
+  @Input() navigateToLink: string;
   thumbnail: SafeResourceUrl;
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(private sanitizer: DomSanitizer, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -25,4 +27,7 @@ export class PropertyCardComponent implements OnInit {
     }
   }
 
+  navigate(): void {
+    this.router.navigate([this.navigateToLink]);
+  }
 }

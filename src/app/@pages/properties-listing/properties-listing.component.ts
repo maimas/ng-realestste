@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Property} from '../../@generated/app-graphql-models';
 import {AppGraphqlService} from '../../@common/services/app-graphql.service';
-import {timeout} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -30,5 +30,4 @@ export class PropertiesListingComponent implements OnInit {
       // console.log(this.property);
     });
   }
-
 }

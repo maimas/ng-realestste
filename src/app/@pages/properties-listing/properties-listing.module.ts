@@ -3,13 +3,29 @@ import {PropertiesListingComponent} from './properties-listing.component';
 import {PropertyCardComponent} from './property-card/property-card.component';
 import {AppMaterialModule} from '../../@modules/app-material.module';
 import {TimeagoModule} from 'ngx-timeago';
+import {PropertyDetailsComponent} from './property-details/property-details.component';
+import {RouterModule, Routes} from '@angular/router';
+
+const childRoutes: Routes = [
+
+  // {path: '', redirectTo: '', pathMatch: 'full'},
+  {path: '', component: PropertiesListingComponent},
+  {path: ':id', component: PropertyDetailsComponent}
+
+
+];
 
 @NgModule({
   declarations: [
     PropertiesListingComponent,
-    PropertyCardComponent
+    PropertyCardComponent,
+    PropertyDetailsComponent
   ],
-  imports: [AppMaterialModule, TimeagoModule],
+  imports: [
+    AppMaterialModule,
+    TimeagoModule,
+    RouterModule.forChild(childRoutes)
+  ],
   exports: [
     PropertiesListingComponent,
     PropertyCardComponent

@@ -1,5 +1,6 @@
 <div fxLayout="row wrap" fxLayoutAlign="center" *ngIf="properties.length>0">
   <app-property-card *ngFor="let dbProperty of properties"
+                     [navigateToLink]="'properties/' + dbProperty.id"
                      [property]="dbProperty"
                      [favorite]="false"
                      class="m-4">

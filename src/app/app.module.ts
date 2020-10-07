@@ -2,22 +2,23 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from '../app.component';
+import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {AppMaterialModule} from './app-material.module';
-import {AppGraphqlModule} from './app-graphql.module';
+import {AppMaterialModule} from './@modules/app-material.module';
+import {AppGraphqlModule} from './@modules/app-graphql.module';
 import {HttpClientModule} from '@angular/common/http';
-import {HeaderComponent} from '../header/header.component';
-import {FooterComponent} from '../footer/footer.component';
-import {AppContentModule} from '../content/content.module';
+import {HeaderComponent} from './header/header.component';
+import {FooterComponent} from './footer/footer.component';
 import {CommonModule} from '@angular/common';
 import {TimeagoModule} from 'ngx-timeago';
+import { PageNotFoundComponent } from './@pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +29,6 @@ import {TimeagoModule} from 'ngx-timeago';
     AppRoutingModule,
     AppMaterialModule,
     AppGraphqlModule,
-    AppContentModule
   ],
   providers: [],
   bootstrap: [AppComponent]
