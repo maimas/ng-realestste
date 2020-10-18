@@ -12,6 +12,7 @@ import {FooterComponent} from './footer/footer.component';
 import {CommonModule} from '@angular/common';
 import {TimeagoModule} from 'ngx-timeago';
 import { PageNotFoundComponent } from './@pages/page-not-found/page-not-found.component';
+import {PipesModule} from './@common/pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { PageNotFoundComponent } from './@pages/page-not-found/page-not-found.co
     AppRoutingModule,
     AppMaterialModule,
     AppGraphqlModule,
+    PipesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

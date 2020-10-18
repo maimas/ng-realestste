@@ -58,6 +58,44 @@ export const USER_FRAGMENT = {
   `
 };
 
+export const PROPERTY_OFFER_FRAGMENT = {
+  NAME: '...PropertyOfferFragment',
+  VALUE: `
+  fragment PropertyOfferFragment on PropertyOffer {
+  id
+  createdBy
+  createdOn
+  modifiedBy
+  modifiedOn
+  deletedBy
+  deletedOn
+  propertyId
+  type
+  dateAvailable
+  contactName
+  contactType
+  currency
+  description
+  email
+  phoneNumber
+  price
+}
+  `
+};
+
+export const ADDRESS_FRAGMENT = {
+  NAME: '...AddressFragment',
+  VALUE: `
+  fragment AddressFragment on Address {
+  sector
+  city
+  country
+  streetAddress
+  zipCode
+}
+  `
+};
+
 export const PROPERTY_FRAGMENT = {
   NAME: '...PropertyFragment',
   VALUE: `
@@ -75,11 +113,18 @@ fragment PropertyFragment on Property {
   deletedBy{
     ${USER_FRAGMENT.NAME}
   }
+  address{
+    ${ADDRESS_FRAGMENT.NAME}
+  }
+  offer {
+    ${PROPERTY_OFFER_FRAGMENT.NAME}
+  }
   amenities
   buildCondition
   buildingType
   condition
   floorNumber
+  totalFloors
   images
   parking
   parkingAvailable
@@ -89,23 +134,8 @@ fragment PropertyFragment on Property {
   totalBathRooms
   totalRooms
   totalSize
-  listing {
-    id
-    contactName
-    contactType
-    createdBy
-    deletedBy
-    modifiedBy
-    createdOn
-    modifiedOn
-    currency
-    description
-    email
-    phoneNumber
-    price
-    propertyId
-    type
-  }
 }
-${USER_FRAGMENT.VALUE}`
+${USER_FRAGMENT.VALUE}
+${ADDRESS_FRAGMENT.VALUE}
+${PROPERTY_OFFER_FRAGMENT.VALUE}`
 };

@@ -1,81 +1,209 @@
-<div>
-  <p>property-details works!</p>
+<div class="p-details-wrapper">
 
+  <!--Spinner-->
+  <ng-container *ngIf="loading">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <mat-spinner [diameter]="40"></mat-spinner>
+      <span>Loading...</span>
+    </div>
+  </ng-container>
+
+  <!--Content-->
+  <ng-container *ngIf="!loading">
+    <div aria-label="Header" class="p-header" fxLayoutAlign="space-between none">
+      <div aria-label="Address" class="p-header-address" fxLayout="row">
+        <mat-icon svgIcon="apartment"></mat-icon>
+        <div fxLayout="column">
+          <div>{{property?.address.streetAddress}}</div>
+          <div>{{property?.address.city}}, {{property?.address.sector}}</div>
+        </div>
+      </div>
+      <div aria-label="Header Buttons" fxLayout="row">
+        <button mat-icon-button [color]="favorite ? 'warn' : 'primary'" (click)="onFavoriteClick()">
+          <mat-icon>{{favorite ? 'favorite' : 'favorite_border'}}</mat-icon>
+        </button>
+        <button mat-icon-button [color]="hideFromMe ? 'warn' : 'primary'" (click)="onHideFromMeButtonClick()">
+          <mat-icon>block</mat-icon>
+        </button>
+
+        <button mat-icon-button [color]="'primary'" [cdkCopyToClipboard]="currentUrl" (click)="onShareButtonClick()">
+          <mat-icon>share</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div aria-label="Header Icons" class="p-sub-header" fxLayout="row wrap-around" fxLayoutAlign="space-around center">
+      <div fxLayoutAlign="center center" aria-label="Offer Type">
+        <mat-icon svgIcon="apartment-key"></mat-icon>
+        <span class="ml-8">{{property?.offer.type | titlecase}}</span>
+      </div>
+
+      <div fxLayoutAlign="center center" aria-label="Price">
+        <mat-icon svgIcon="apartment-price"></mat-icon>
+        <span class="ml-8">{{property?.offer.price| currency:property?.offer.currency:'symbol':'3.0' }}</span>
+      </div>
+
+      <div fxLayoutAlign="center center" aria-label="Total Size">
+        <mat-icon svgIcon="apartment-area"></mat-icon>
+        <span class="ml-8">{{property.totalSize}} {{property.sizeUnitOfMeasurement | lowercase}}</span>
+      </div>
+
+      <div fxLayoutAlign="center center" aria-label="Total Bathrooms">
+        <mat-icon svgIcon="apartment-badrooms"></mat-icon>
+        <span class="ml-8">{{property.totalBathRooms}}</span>
+      </div>
+
+      <div fxLayoutAlign="center center" aria-label="Total bedrooms">
+        <mat-icon svgIcon="apartment-bathrooms"></mat-icon>
+        <span class="ml-8">{{property.totalBathRooms}}</span>
+      </div>
+
+      <div fxLayoutAlign="center center" aria-label="Parking">
+        <mat-icon svgIcon="apartment-garage"></mat-icon>
+        <span class="ml-8">{{property.parkingAvailable | yesNo}} - {{property.parking}}</span>
+      </div>
+
+
+    </div>
+
+    <gallery [items]="images"></gallery>
+
+    <div aria-label="Details" class="p-content">
+      <div aria-label="Overview" class="mb-20">
+        <div class="f-weight-400 f-size-20 mb-5">Overview</div>
+        <div aria-label="Stats" class="overview-stats" fxLayout="row wrap" fxLayoutAlign="space-around">
+          <div fxLayoutAlign="start center">
+            <mat-icon class="mr-4">query_builder</mat-icon>
+            <div>Listed {{property?.offer?.createdOn | timeago}}</div>
+          </div>
+          <div>|</div>
+          <div fxLayoutAlign="start center">
+            <mat-icon class="mr-4">visibility</mat-icon>
+            <div>Views 10</div>
+          </div>
+          <div>|</div>
+          <div fxLayoutAlign="start center">
+            <mat-icon class="mr-4">contact_mail</mat-icon>
+            <div>Applications 0</div>
+          </div>
+        </div>
+        <div aria-label="Description" fxLayout="row" class="mb-10">{{property?.offer?.description}}</div>
+        <mat-divider></mat-divider>
+      </div>
+
+      <div aria-label="Home Facts" class="mb-20">
+        <div class="f-weight-400 f-size-20 mt-10 mb-10">Home Facts</div>
+        <div class="facts" fxLayout="row wrap" fxLayoutGap="50px">
+          <div aria-label="column-1" fxFlex>
+            <div aria-label="Offer Type" fxLayout="row" fxLayoutAlign="start center" class="mb-5">
+              <mat-icon color="primary" class="mr-5">local_offer</mat-icon>
+              <div>Offer</div>
+              <div class="dot-div"></div>
+              <div>{{property?.offer?.type}}</div>
+            </div>
+            <div aria-label="Build Type" fxLayout="row" fxLayoutAlign="start center" class="mb-5">
+              <mat-icon color="primary" class="mr-5">apartment</mat-icon>
+              <div>Type</div>
+              <div class="dot-div"></div>
+              <div>{{property?.buildingType}} - {{property?.condition}}</div>
+            </div>
+            <div aria-label="Build condition" fxLayout="row" fxLayoutAlign="start center" class="mb-5">
+              <mat-icon color="primary" class="mr-5">list_alt</mat-icon>
+              <div>Build</div>
+              <div class="dot-div"></div>
+              <div>{{property.buildCondition}}</div>
+            </div>
+            <div aria-label="Price" fxLayout="row" fxLayoutAlign="start center" class="mb-5">
+              <mat-icon color="primary" class="mr-5">payments</mat-icon>
+              <div>Price</div>
+              <div class="dot-div"></div>
+              <div>{{property?.offer.price| currency:property?.offer.currency:'symbol':'3.0' }}</div>
+            </div>
+            <div aria-label="Date Available" fxLayout="row" fxLayoutAlign="start center" class="mb-5">
+              <mat-icon color="primary" class="mr-5">insert_invitation</mat-icon>
+              <div>Date available</div>
+              <div class="dot-div"></div>
+              <div>{{property?.offer?.dateAvailable| date }}</div>
+            </div>
+          </div>
+
+          <div aria-label="column-2" fxFlex>
+            <div aria-label="rooms" fxLayout="row" fxLayoutAlign="start center" class="mb-5">
+              <mat-icon color="primary" class="mr-5">night_shelter</mat-icon>
+              <div>Rooms</div>
+              <div class="dot-div"></div>
+              <div>{{property.totalRooms}}</div>
+            </div>
+            <div aria-label="bathrooms" fxLayout="row" fxLayoutAlign="start center" class="mb-5">
+              <mat-icon color="primary" class="mr-5">bathtub</mat-icon>
+              <div>Bathrooms</div>
+              <div class="dot-div"></div>
+              <div>{{property.totalBathRooms}}</div>
+            </div>
+            <div aria-label="balconies" fxLayout="row" fxLayoutAlign="start center" class="mb-5">
+              <mat-icon color="primary" class="mr-5">panorama</mat-icon>
+              <div>Balconies</div>
+              <div class="dot-div"></div>
+              <div>{{property.totalBalconies}}</div>
+            </div>
+            <div aria-label="area-size" fxLayout="row" fxLayoutAlign="start center" class="mb-5">
+              <mat-icon color="primary" class="mr-5">aspect_ratio</mat-icon>
+              <div>Total Size</div>
+              <div class="dot-div"></div>
+              <div>{{property.totalSize}} {{property.sizeUnitOfMeasurement | lowercase}}</div>
+            </div>
+            <div aria-label="parking" fxLayout="row" fxLayoutAlign="start center" class="mb-5">
+              <mat-icon color="primary" class="mr-5">local_parking</mat-icon>
+              <div>Parking</div>
+              <div class="dot-div"></div>
+              <div>{{property.parkingAvailable | yesNo}} - {{property.parking}}</div>
+            </div>
+            <div aria-label="floor" fxLayout="row" fxLayoutAlign="start center" class="mb-5">
+              <mat-icon color="primary" class="mr-5">elevator</mat-icon>
+              <div>Floor</div>
+              <div class="dot-div"></div>
+              <div>{{property.floorNumber}} from {{property.totalFloors}}</div>
+            </div>
+
+          </div>
+        </div>
+<!--        <mat-divider></mat-divider>-->
+      </div>
+
+      <div aria-label="Amenities" class="mb-20">
+        <div class="f-weight-400 f-size-20 mt-10 mb-10">Amenities</div>
+        <mat-chip-list aria-label="Amenities">
+          <mat-chip color="primary" selected *ngFor="let amenity of property.amenities">{{amenity}}</mat-chip>
+        </mat-chip-list>
+      </div>
+
+      <div aria-label="Contact" class="mb-20">
+        <div class="f-weight-400 f-size-20 mt-10 mb-10">Contact</div>
+        <div class="facts" fxLayout="row wrap">
+          <div aria-label="column-1" fxFlex>
+            <div aria-label="Contact Name" fxLayout="row" fxLayoutAlign="start center" class="mb-5">
+              <mat-icon color="primary" class="mr-5">person</mat-icon>
+              <div>Name</div>
+              <div class="dot-div"></div>
+              <div>{{property?.offer?.contactName}} ({{property.offer.contactType}})</div>
+            </div>
+            <div aria-label="Contact Email" fxLayout="row" fxLayoutAlign="start center" class="mb-5">
+              <mat-icon color="primary" class="mr-5">alternate_email</mat-icon>
+              <div>Email</div>
+              <div class="dot-div"></div>
+              <div>{{property.offer.email}}</div>
+            </div>
+            <div aria-label="Contact Phone" fxLayout="row" fxLayoutAlign="start center" class="mb-5">
+              <mat-icon color="primary" class="mr-5">call</mat-icon>
+              <div>Phone</div>
+              <div class="dot-div"></div>
+              <div>{{property.offer.phoneNumber}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </ng-container>
 </div>
-
-<svg id="garage" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-     y="0px"
-     viewBox="0 0 175.096 175.096" xml:space="preserve"> <path style="fill:#9297a0;"
-                                                               d="M140.43,172.248h-7.583c-3.078,0-5.583-2.505-5.583-5.583v-10.542H47.833v10.542 c0,3.079-2.505,5.583-5.584,5.583h-7.583c-3.078,0-5.583-2.505-5.583-5.583v-10.542h-6.534c-1.381,0-2.5-1.119-2.5-2.5v-18.417 c0-1.381,1.119-2.5,2.5-2.5h2.833v-24.542c0-7.398,6.019-13.417,13.417-13.417h2.5l4.579-27.699 c-0.001-0.017-0.001-0.034-0.001-0.051c0-5.928,4.822-10.75,10.75-10.75h61.843c5.928,0,10.75,4.822,10.75,10.75 c0,0.017,0,0.034-0.001,0.051l4.579,27.699h2.501c7.397,0,13.416,6.019,13.416,13.417v24.542h2.834c1.381,0,2.5,1.119,2.5,2.5 v18.417c0,1.381-1.119,2.5-2.5,2.5h-6.534v10.542C146.014,169.743,143.51,172.248,140.43,172.248z M132.264,156.123v10.542 c0,0.322,0.262,0.583,0.583,0.583h7.583c0.322,0,0.584-0.262,0.584-0.583v-10.542H132.264z M34.083,156.123v10.542 c0,0.322,0.262,0.583,0.583,0.583h7.583c0.322,0,0.584-0.262,0.584-0.583v-10.542H34.083z M143.514,151.123h6.534v-13.417h-125 v13.417H143.514z M115.674,132.706h29.041v-24.542c0-4.641-3.775-8.417-8.416-8.417h-97.5c-4.642,0-8.417,3.775-8.417,8.417v24.542 h29.042v-25.919c0-1.381,1.119-2.5,2.5-2.5s2.5,1.119,2.5,2.5v25.919h5.25v-25.919c0-1.381,1.119-2.5,2.5-2.5s2.5,1.119,2.5,2.5 v25.919h5.25v-25.919c0-1.381,1.119-2.5,2.5-2.5s2.5,1.119,2.5,2.5v25.919h5.25v-25.919c0-1.381,1.119-2.5,2.5-2.5 s2.5,1.119,2.5,2.5v25.919h5.25v-25.919c0-1.381,1.119-2.5,2.5-2.5s2.5,1.119,2.5,2.5v25.919h5.25v-25.919 c0-1.381,1.119-2.5,2.5-2.5s2.5,1.119,2.5,2.5V132.706z M46.367,94.748h82.362l-4.174-25.25H50.541L46.367,94.748z M51.449,64.498 h72.198c-0.932-1.922-2.902-3.25-5.178-3.25H56.627C54.351,61.248,52.381,62.576,51.449,64.498z M131.677,121.537 c-4.756,0-8.625-3.869-8.625-8.625s3.869-8.625,8.625-8.625s8.625,3.869,8.625,8.625S136.432,121.537,131.677,121.537z M131.677,109.287c-1.999,0-3.625,1.626-3.625,3.625s1.626,3.625,3.625,3.625s3.625-1.626,3.625-3.625 S133.676,109.287,131.677,109.287z M43.42,121.537c-4.756,0-8.625-3.869-8.625-8.625s3.869-8.625,8.625-8.625 s8.625,3.869,8.625,8.625S48.176,121.537,43.42,121.537z M43.42,109.287c-1.999,0-3.625,1.626-3.625,3.625s1.626,3.625,3.625,3.625 s3.625-1.626,3.625-3.625S45.419,109.287,43.42,109.287z M172.594,57.35c-0.428,0-0.86-0.109-1.256-0.34L87.549,8.242L3.759,57.01 C2.567,57.703,1.036,57.3,0.34,56.107c-0.694-1.193-0.29-2.724,0.903-3.418L86.249,3.213c0.088-0.054,0.179-0.102,0.272-0.144 c0.33-0.149,0.68-0.221,1.025-0.221c0.001,0,0.003,0,0.005,0c0.344,0,0.691,0.071,1.021,0.219c0.095,0.042,0.188,0.091,0.276,0.146 l85.005,49.475c1.193,0.694,1.598,2.225,0.903,3.418C174.292,56.904,173.454,57.35,172.594,57.35z"></path>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g> </svg>
-
-<svg id="size" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-     y="0px" viewBox="0 0 151.91 151.91" xml:space="preserve"> <path style="fill:#9297a0;"
-                                                                     d="M143.972,150.268c-0.64,0-1.28-0.244-1.768-0.732c-0.977-0.977-0.977-2.559,0-3.535l1.107-1.107 H29.133L30.24,146c0.977,0.977,0.977,2.559,0,3.535c-0.976,0.977-2.56,0.977-3.535,0l-5.313-5.313 c-0.496-0.496-0.74-1.148-0.732-1.799c0-0.01,0-0.021,0-0.031c0-0.86,0.434-1.618,1.095-2.068l5.075-5.074 c0.976-0.977,2.56-0.977,3.535,0c0.977,0.977,0.977,2.559,0,3.535l-1.107,1.107h114.179l-1.107-1.107 c-0.977-0.977-0.977-2.559,0-3.535c0.976-0.977,2.56-0.977,3.535,0l5.313,5.313c0.497,0.496,0.74,1.148,0.732,1.799 c0,0.011,0,0.021,0,0.031c0,0.86-0.434,1.618-1.095,2.068l-5.075,5.074C145.252,150.024,144.612,150.268,143.972,150.268z M7.875,132.893c-0.86,0-1.619-0.435-2.068-1.096l-5.074-5.074c-0.977-0.977-0.977-2.559,0-3.535c0.976-0.977,2.56-0.977,3.535,0 l1.107,1.107V10.115l-1.107,1.107c-0.976,0.977-2.56,0.977-3.535,0c-0.977-0.977-0.977-2.559,0-3.535l5.313-5.313 c0.496-0.496,1.144-0.749,1.798-0.732c0.886,0.021,1.645,0.426,2.1,1.096l5.074,5.074c0.977,0.977,0.977,2.559,0,3.535 c-0.976,0.977-2.56,0.977-3.535,0l-1.107-1.107v114.18l1.107-1.107c0.976-0.977,2.56-0.977,3.535,0c0.977,0.977,0.977,2.559,0,3.535 l-5.313,5.313c-0.496,0.496-1.154,0.746-1.798,0.732C7.896,132.893,7.886,132.893,7.875,132.893z M149.41,125.82H28.597 c-1.381,0-2.5-1.119-2.5-2.5V4.143c0-1.381,1.119-2.5,2.5-2.5h72.194c1.381,0,2.5,1.119,2.5,2.5v48.523h46.118 c1.381,0,2.5,1.119,2.5,2.5v68.153C151.91,124.7,150.791,125.82,149.41,125.82z M103.184,120.82h43.726V57.666h-43.726V120.82z M55.292,120.82h42.893V87.332H55.292V120.82z M31.097,120.82h19.194V87.332H31.097V120.82z M52.792,82.332h45.393V55.166 c0-0.253,0.038-0.497,0.107-0.728V28.332H31.097v54H52.792z M67.141,23.332h31.151V6.643H67.141V23.332z M31.097,23.332h31.043 V6.643H31.097V23.332z"></path>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g> </svg>
-
-<svg id="bedrooms" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-     y="0px" viewBox="0 0 191.886 191.886" xml:space="preserve"> <path style="fill:#9297a0;"
-                                                                       d="M189.386,156.13h-14.317c-1.381,0-2.5-1.119-2.5-2.5v-18.441H20.503v18.441 c0,1.381-1.119,2.5-2.5,2.5H2.5c-1.381,0-2.5-1.119-2.5-2.5V38.255c0-1.381,1.119-2.5,2.5-2.5h15.503c1.381,0,2.5,1.119,2.5,2.5 v34.288c1.851-1.272,4.089-2.018,6.5-2.018h30.995c6.341,0,11.5,5.159,11.5,11.5v3.336c0,2.41-0.745,4.649-2.018,6.5h105.088V69.075 c0-1.381,1.119-2.5,2.5-2.5h14.317c1.381,0,2.5,1.119,2.5,2.5v84.556C191.886,155.011,190.767,156.13,189.386,156.13z M177.568,151.13h9.317V71.575h-9.317V151.13z M5,151.13h10.503V40.755H5V151.13z M20.503,130.189h152.065v-8.829H20.503V130.189z M20.503,116.36h152.065V96.862H20.503V116.36z M27.003,91.862h30.995c3.584,0,6.5-2.916,6.5-6.5v-3.336c0-3.584-2.916-6.5-6.5-6.5 H27.003c-3.584,0-6.5,2.916-6.5,6.5v3.336C20.503,88.946,23.419,91.862,27.003,91.862z"></path>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g> </svg>
-
-<svg id="baths" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-     y="0px" viewBox="0 0 185 185" xml:space="preserve"> <path style="fill:#9297a0;"
-                                                               d="M138.955,153.149c-1.381,0-2.5-1.119-2.5-2.5v-7.5H48.545v7.5c0,1.381-1.119,2.5-2.5,2.5 s-2.5-1.119-2.5-2.5v-7.646c-20.184-1.632-36.052-16.824-36.052-35.263V77.35H2.5c-1.381,0-2.5-1.119-2.5-2.5v-8.549 c0-1.381,1.119-2.5,2.5-2.5h4.994V47.156c-0.034-0.851-0.134-7.087,3.91-11.37c2.464-2.611,5.864-3.935,10.104-3.935 c4.267,0,7.721,1.317,10.268,3.916c4.315,4.402,4.237,10.861,4.231,11.134c-0.027,1.363-1.141,2.45-2.499,2.45 c-0.017,0-0.034,0-0.051-0.001c-1.378-0.027-2.473-1.164-2.45-2.541c0-0.125-0.005-4.712-2.826-7.565 c-1.57-1.588-3.815-2.393-6.675-2.393c-2.85,0-4.965,0.774-6.469,2.366c-2.747,2.91-2.552,7.691-2.55,7.738 c0.003,0.049,0.004,0.097,0.004,0.145v5.472c1.17-0.6,2.496-0.938,3.898-0.938c4.733,0,8.583,3.851,8.583,8.583 c0,1.278-0.281,2.492-0.784,3.584H182.5c1.381,0,2.5,1.119,2.5,2.5v8.549c0,1.381-1.119,2.5-2.5,2.5h-4.994v30.391 c0,18.438-15.868,33.631-36.052,35.263v7.646C141.455,152.03,140.335,153.149,138.955,153.149z M48.545,138.149h87.909v-7.5 c0-1.381,1.119-2.5,2.5-2.5s2.5,1.119,2.5,2.5v7.337c17.423-1.588,31.052-14.546,31.052-30.245V77.35H12.494v30.391 c0,15.699,13.629,28.657,31.052,30.245v-7.337c0-1.381,1.119-2.5,2.5-2.5s2.5,1.119,2.5,2.5V138.149z M5,72.35h175v-3.549H5V72.35z M16.392,56.634c-1.976,0-3.583,1.607-3.583,3.583c0,1.977,1.607,3.584,3.583,3.584c1.976,0,3.583-1.607,3.583-3.584 C19.975,58.242,18.368,56.634,16.392,56.634z"></path>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g>
-  <g> </g> </svg>

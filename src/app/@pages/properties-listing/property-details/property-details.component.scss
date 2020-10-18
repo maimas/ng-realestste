@@ -1,4 +1,64 @@
-svg{
+.p-details-wrapper {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  background-color: #fff !important;
+  position: relative;
+  height: 100%;
+  margin: 0 auto;
+  max-width: 1000px;
+
+
+  .p-header {
+    padding: 10px;
+
+    .p-header-address {
+      font-weight: 500;
+      font-size: medium;
+      color: #333333;
+
+      mat-icon {
+        width: 48px;
+        height: 48px;
+        transform: scale(1);
+      }
+    }
+  }
+
+  .p-sub-header {
+    padding: 10px;
+    margin-top: 10px;
+
+    mat-icon {
+      color: #747474;
+      width: 35px;
+      height: 35px;
+      transform: scale(1);
+    }
+  }
+
+  .p-content {
+    padding: 10px;
+    margin-top: 10px;
+
+    .overview-stats {
+      color: #919191;
+      font-size: 15px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .facts {
+      padding-right: 20px;
+      .dot-div {
+        border-bottom: thin dotted #bfbfbf;
+        min-width: 50px;
+        flex-grow: 1;
+        height: 9px;
+      }
+    }
+  }
+}
+
+svg {
   width: 21%;
   height: auto;
   max-height: 30px;

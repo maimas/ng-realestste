@@ -17,7 +17,7 @@
     <!--Info section-->
     <div class="bottom-info" (click)="navigate()">
       <div class="stats" fxLayout="row" fxLayoutAlign="space-between center">
-        <div id="price"> {{600000 | currency:'USD':'symbol':'3.0' }}</div>
+        <div id="price"> {{property?.offer?.price | currency:property?.offer?.currency:'symbol':'3.0' }}</div>
         <div>{{property.totalRooms}} Beds</div>
         <div>|</div>
         <div>{{property.totalBathRooms}} Baths</div>
@@ -25,7 +25,14 @@
         <div id="totalSize">{{property.totalSize}} {{property.sizeUnitOfMeasurement}}</div>
       </div>
       <div fxLayout="row" fxLayoutAlign="start">
-        <div class="address">19224 5th Dr SE, Bothell, WA 98012</div>
+        <div class="address">
+          <span *ngIf="property.address">
+            {{property?.address?.city}}, {{property?.address?.sector}}, {{property?.address?.streetAddress}}
+          </span>
+          <span *ngIf="!property.address">
+            ...
+          </span>
+        </div>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="space-between center">

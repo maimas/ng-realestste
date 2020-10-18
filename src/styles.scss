@@ -1,13 +1,21 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import "app/@common/styles/shared-styles";
 
-html, body {
+html {
+  overflow-y: scroll;
   height: 100%;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  height: 100%;
 }
 
 .default-theme {
@@ -19,42 +27,43 @@ body {
   .wrapper {
     height: 100vh;
     display: flex;
-    /* Direction of the items, can be row or column */
     flex-direction: column;
-  }
-  .wrapper::after {
-    content: "";
-    background-image: url(assets/images/defaults/bg.jpg);
-    opacity: 0.05;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-  }
 
-  header {
-    height: 50px;
-    position: sticky;
-    position: -webkit-sticky; /* For macOS/iOS Safari */
-    top: 0; /* Sets the sticky toolbar to be on top */
-    z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
-  }
-
-  footer {
-    min-height: 30px;
-
-    app-footer {
-      min-width: 100% !important;
+    header {
+      position: sticky;
+      position: -webkit-sticky; /* For macOS/iOS Safari */
+      top: 0; /* Sets the sticky toolbar to be on top */
+      z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
     }
+
+    main {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      flex: 1;
+      position: relative;
+    }
+
+    main::after {
+      content: "";
+      background-image: url(assets/images/defaults/bg.jpg);
+      opacity: 0.05;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      z-index: -1;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    footer {
+      margin: 0;
+      min-height: 100px;
+    }
+
   }
 
-  main {
-    padding-top: 20px;
-    flex: 1;
-  }
+
 }
