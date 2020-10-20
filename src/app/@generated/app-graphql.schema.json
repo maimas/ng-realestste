@@ -486,7 +486,7 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "sector",
+            "name": "country",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -496,7 +496,7 @@
             "defaultValue": null
           },
           {
-            "name": "country",
+            "name": "zipCode",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -516,7 +516,7 @@
             "defaultValue": null
           },
           {
-            "name": "zipCode",
+            "name": "sector",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -547,31 +547,11 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "createdBy",
+            "name": "offerType",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "description",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "phoneNumber",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "kind": "ENUM",
+              "name": "OfferType",
               "ofType": null
             },
             "defaultValue": null
@@ -587,37 +567,7 @@
             "defaultValue": null
           },
           {
-            "name": "dateAvailable",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Instant",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "type",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "Type",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "contactType",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "ContactType",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "id",
+            "name": "propertyId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -637,7 +587,7 @@
             "defaultValue": null
           },
           {
-            "name": "propertyId",
+            "name": "phoneNumber",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -647,31 +597,11 @@
             "defaultValue": null
           },
           {
-            "name": "email",
+            "name": "deletedOn",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "price",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "deletedBy",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "name": "Instant",
               "ofType": null
             },
             "defaultValue": null
@@ -707,7 +637,67 @@
             "defaultValue": null
           },
           {
-            "name": "deletedOn",
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "contactType",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "ContactType",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "price",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "createdBy",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "deletedBy",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "dateAvailable",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -715,9 +705,174 @@
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "email",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Attachment",
+        "description": "",
+        "fields": [
+          {
+            "name": "createdBy",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdOn",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Instant",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Base64String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deletedBy",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deletedOn",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Instant",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "metadata",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "HashMap_String_ObjectScalar",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "modifiedBy",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "modifiedOn",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Instant",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "relatedItemId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "type",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "AttachmentType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
@@ -758,6 +913,35 @@
         "inputFields": null,
         "interfaces": null,
         "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "OfferType",
+        "description": "",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "Buy",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "Rent",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "Sell",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "possibleTypes": null
       },
       {
@@ -973,6 +1157,18 @@
             "deprecationReason": null
           },
           {
+            "name": "offerType",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "OfferType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "phoneNumber",
             "description": null,
             "args": [],
@@ -997,36 +1193,12 @@
             "deprecationReason": null
           },
           {
-            "name": "property",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Property",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "propertyId",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "type",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "ENUM",
-              "name": "Type",
               "ofType": null
             },
             "isDeprecated": false,
@@ -1133,6 +1305,22 @@
               "ofType": {
                 "kind": "ENUM",
                 "name": "Amenities",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "attachments",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Attachment",
                 "ofType": null
               }
             },
@@ -1259,22 +1447,6 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "images",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Base64String",
-                "ofType": null
-              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1515,6 +1687,47 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "AttachmentType",
+        "description": "",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "DOC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "HTML",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "IMAGE",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PDF",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "VIDEO",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "SCALAR",
         "name": "Instant",
         "description": "Built-in scalar representing an instant in time",
@@ -1554,7 +1767,7 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "deletedBy",
+            "name": "createdBy",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1564,51 +1777,7 @@
             "defaultValue": null
           },
           {
-            "name": "enabled",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "deletedOn",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Instant",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "dateOfBirth",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Instant",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "password",
+            "name": "lastName",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1628,26 +1797,6 @@
             "defaultValue": null
           },
           {
-            "name": "status",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "Status",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "createdOn",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Instant",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
             "name": "gender",
             "description": null,
             "type": {
@@ -1658,7 +1807,91 @@
             "defaultValue": null
           },
           {
+            "name": "enabled",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "status",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Status",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "firstName",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "password",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "dateOfBirth",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Instant",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "deletedBy",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "modifiedOn",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Instant",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "createdOn",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1678,31 +1911,11 @@
             "defaultValue": null
           },
           {
-            "name": "firstName",
+            "name": "deletedOn",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "createdBy",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "lastName",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "name": "Instant",
               "ofType": null
             },
             "defaultValue": null
@@ -1908,65 +2121,11 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "totalRooms",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "thumbnail",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Base64String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "images",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Base64String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "totalBathRooms",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "modifiedOn",
+            "name": "deletedOn",
             "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "Instant",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "modifiedBy",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
               "ofType": null
             },
             "defaultValue": null
@@ -1986,7 +2145,7 @@
             "defaultValue": null
           },
           {
-            "name": "deletedBy",
+            "name": "createdBy",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1996,31 +2155,21 @@
             "defaultValue": null
           },
           {
-            "name": "buildingType",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "BuildingType",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "address",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "AddressInput",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "totalFloors",
+            "name": "modifiedOn",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "Instant",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "thumbnail",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Base64String",
               "ofType": null
             },
             "defaultValue": null
@@ -2036,51 +2185,11 @@
             "defaultValue": null
           },
           {
-            "name": "createdBy",
+            "name": "modifiedBy",
             "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "totalSize",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "BigDecimal",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "totalBalconies",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "buildCondition",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "BuildCondition",
               "ofType": null
             },
             "defaultValue": null
@@ -2096,11 +2205,31 @@
             "defaultValue": null
           },
           {
-            "name": "createdOn",
+            "name": "id",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "Instant",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "totalFloors",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "totalBalconies",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
               "ofType": null
             },
             "defaultValue": null
@@ -2111,6 +2240,56 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parking",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "Parking",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "totalRooms",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "totalSize",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "BigDecimal",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "address",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "AddressInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "deletedBy",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null
@@ -2130,7 +2309,7 @@
             "defaultValue": null
           },
           {
-            "name": "deletedOn",
+            "name": "createdOn",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2140,11 +2319,31 @@
             "defaultValue": null
           },
           {
-            "name": "parking",
+            "name": "totalBathRooms",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "buildCondition",
             "description": null,
             "type": {
               "kind": "ENUM",
-              "name": "Parking",
+              "name": "BuildCondition",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "buildingType",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "BuildingType",
               "ofType": null
             },
             "defaultValue": null
@@ -2155,40 +2354,152 @@
         "possibleTypes": null
       },
       {
-        "kind": "ENUM",
-        "name": "Type",
-        "description": "",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "Buy",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "Rent",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "Sell",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
         "kind": "SCALAR",
         "name": "UNREPRESENTABLE",
         "description": "Unrepresentable type",
         "fields": null,
         "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "HashMap_String_ObjectScalar",
+        "description": "Built-in scalar for map-like structures",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "AttachmentInput",
+        "description": "",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "type",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "AttachmentType",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "deletedBy",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "deletedOn",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Instant",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "relatedItemId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "createdOn",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Instant",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "metadata",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "HashMap_String_ObjectScalar",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "modifiedBy",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "modifiedOn",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Instant",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "createdBy",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "data",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Base64String",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
         "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
@@ -2331,6 +2642,51 @@
                     "kind": "INPUT_OBJECT",
                     "name": "AddressInput",
                     "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "propertyId",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Property",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "savePropertyAttachments",
+            "description": null,
+            "args": [
+              {
+                "name": "attachments",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "AttachmentInput",
+                      "ofType": null
+                    }
                   }
                 },
                 "defaultValue": null

@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Property} from '../../../@generated/app-graphql-models';
+import {AttachmentType, Property} from '../../../@generated/app-graphql-models';
 import {AppGraphqlService} from '../../../@common/services/app-graphql.service';
 import {ActivatedRoute} from '@angular/router';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {GalleryItem, ImageItem, VideoItem, YoutubeItem} from 'ng-gallery';
+import {GalleryItem, ImageItem} from 'ng-gallery';
+import {HYDRATED_PROPERTY_FRAGMENT} from '../../../@common/services/app-graphql.fragments';
 
 @Component({
   selector: 'app-property-details',
@@ -15,7 +16,7 @@ import {GalleryItem, ImageItem, VideoItem, YoutubeItem} from 'ng-gallery';
 export class PropertyDetailsComponent implements OnInit {
 
   property: Property;
-  images: GalleryItem[] = [];
+  galleryImages: GalleryItem[] = [];
   favorite = true;
   hideFromMe = false;
   currentUrl: string = window.location.href;
@@ -43,7 +44,7 @@ export class PropertyDetailsComponent implements OnInit {
   ngOnInit(): void {
     const propertyId = this.route.snapshot.paramMap.get('id');
 
-    this.appGraphqlService.getPropertyById({id: propertyId})
+    this.appGraphqlService.getPropertyById({id: propertyId}, HYDRATED_PROPERTY_FRAGMENT)
       .valueChanges.subscribe(result => {
       // @ts-ignore
       this.property = result.data && result.data.findPropertyById;
@@ -56,19 +57,17 @@ export class PropertyDetailsComponent implements OnInit {
   }
 
   loadGalleryImages(): void {
-    if (this.property.images && this.property.images.length > 0) {
-      this.property.images.forEach(imgData => {
-        this.images.push(new ImageItem({
-          src: 'data:image/jpg;base64,' + imgData,
-          thumb: 'data:image/jpg;base64,' + imgData
-        }));
+    const attachments = this.property.attachments;
 
+    if (attachments && attachments.length > 0) {
+      attachments.forEach(att => {
+        if (att.type === AttachmentType.Image) {
+          this.galleryImages.push(new ImageItem({src: 'data:image/jpg;base64,' + att.data, thumb: 'data:image/jpg;base64,' + att.data}));
+        }
       });
     } else { // image not found default image
-      this.images.push(new ImageItem({
-        src: 'assets/images/defaults/image_not_available.jpg',
-        thumb: 'assets/images/defaults/image_not_available.jpg'
-      }));
+      const defaultImg = 'assets/images/defaults/image_not_available.jpg';
+      this.galleryImages.push(new ImageItem({src: defaultImg, thumb: defaultImg}));
     }
   }
 

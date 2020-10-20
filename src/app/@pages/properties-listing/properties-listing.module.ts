@@ -28,7 +28,7 @@ const childRoutes: Routes = [
     TimeagoModule,
     RouterModule.forChild(childRoutes),
     PipesModule,
-    GalleryModule
+    GalleryModule,
   ],
   exports: [
     PropertiesListingComponent,

@@ -18,6 +18,8 @@ export type Scalars = {
   BigDecimal: any;
   /** Unrepresentable type */
   UNREPRESENTABLE: any;
+  /** Built-in scalar for map-like structures */
+  HashMap_String_ObjectScalar: any;
 };
 
 
@@ -96,31 +98,47 @@ export type Address = {
 };
 
 export type AddressInput = {
-  sector?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
-  city?: Maybe<Scalars['String']>;
   zipCode?: Maybe<Scalars['String']>;
+  city?: Maybe<Scalars['String']>;
+  sector?: Maybe<Scalars['String']>;
   streetAddress?: Maybe<Scalars['String']>;
 };
 
 export type PropertyOfferInput = {
-  createdBy?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  phoneNumber?: Maybe<Scalars['String']>;
+  offerType?: Maybe<OfferType>;
   contactName?: Maybe<Scalars['String']>;
-  dateAvailable?: Maybe<Scalars['Instant']>;
-  type?: Maybe<Type>;
-  contactType?: Maybe<ContactType>;
-  id?: Maybe<Scalars['String']>;
-  currency?: Maybe<Currency>;
   propertyId?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  price?: Maybe<Scalars['Int']>;
-  deletedBy?: Maybe<Scalars['String']>;
+  currency?: Maybe<Currency>;
+  phoneNumber?: Maybe<Scalars['String']>;
+  deletedOn?: Maybe<Scalars['Instant']>;
   modifiedOn?: Maybe<Scalars['Instant']>;
   createdOn?: Maybe<Scalars['Instant']>;
   modifiedBy?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  contactType?: Maybe<ContactType>;
+  id?: Maybe<Scalars['String']>;
+  price?: Maybe<Scalars['Int']>;
+  createdBy?: Maybe<Scalars['String']>;
+  deletedBy?: Maybe<Scalars['String']>;
+  dateAvailable?: Maybe<Scalars['Instant']>;
+  email?: Maybe<Scalars['String']>;
+};
+
+export type Attachment = {
+  __typename?: 'Attachment';
+  createdBy?: Maybe<Scalars['String']>;
+  createdOn?: Maybe<Scalars['Instant']>;
+  data?: Maybe<Scalars['Base64String']>;
+  deletedBy?: Maybe<Scalars['String']>;
   deletedOn?: Maybe<Scalars['Instant']>;
+  id?: Maybe<Scalars['String']>;
+  metadata?: Maybe<Scalars['HashMap_String_ObjectScalar']>;
+  modifiedBy?: Maybe<Scalars['String']>;
+  modifiedOn?: Maybe<Scalars['Instant']>;
+  name?: Maybe<Scalars['String']>;
+  relatedItemId?: Maybe<Scalars['String']>;
+  type?: Maybe<AttachmentType>;
 };
 
 export enum Gender {
@@ -129,6 +147,12 @@ export enum Gender {
   Unknown = 'Unknown'
 }
 
+
+export enum OfferType {
+  Buy = 'Buy',
+  Rent = 'Rent',
+  Sell = 'Sell'
+}
 
 export enum BuildingType {
   Apartment = 'Apartment',
@@ -153,11 +177,10 @@ export type PropertyOffer = {
   id?: Maybe<Scalars['String']>;
   modifiedBy?: Maybe<Scalars['String']>;
   modifiedOn?: Maybe<Scalars['Instant']>;
+  offerType?: Maybe<OfferType>;
   phoneNumber?: Maybe<Scalars['String']>;
   price?: Maybe<Scalars['Int']>;
-  property?: Maybe<Property>;
   propertyId?: Maybe<Scalars['String']>;
-  type?: Maybe<Type>;
 };
 
 export enum Currency {
@@ -177,6 +200,7 @@ export type Property = {
   __typename?: 'Property';
   address?: Maybe<Address>;
   amenities?: Maybe<Array<Maybe<Amenities>>>;
+  attachments?: Maybe<Array<Maybe<Attachment>>>;
   buildCondition?: Maybe<BuildCondition>;
   buildingType?: Maybe<BuildingType>;
   changes?: Maybe<Array<Maybe<Change>>>;
@@ -187,7 +211,6 @@ export type Property = {
   deletedOn?: Maybe<Scalars['Instant']>;
   floorNumber?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['String']>;
-  images?: Maybe<Array<Maybe<Scalars['Base64String']>>>;
   modifiedBy?: Maybe<User>;
   modifiedOn?: Maybe<Scalars['Instant']>;
   offer?: Maybe<PropertyOffer>;
@@ -219,6 +242,14 @@ export enum Status {
   Pending = 'Pending'
 }
 
+export enum AttachmentType {
+  Doc = 'DOC',
+  Html = 'HTML',
+  Image = 'IMAGE',
+  Pdf = 'PDF',
+  Video = 'VIDEO'
+}
+
 
 export enum Parking {
   Private = 'Private',
@@ -226,21 +257,21 @@ export enum Parking {
 }
 
 export type UserInput = {
-  deletedBy?: Maybe<Scalars['String']>;
-  enabled: Scalars['Boolean'];
-  deletedOn?: Maybe<Scalars['Instant']>;
-  id?: Maybe<Scalars['String']>;
-  dateOfBirth?: Maybe<Scalars['Instant']>;
-  password?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  status?: Maybe<Status>;
-  createdOn?: Maybe<Scalars['Instant']>;
-  gender?: Maybe<Gender>;
-  modifiedOn?: Maybe<Scalars['Instant']>;
-  modifiedBy?: Maybe<Scalars['String']>;
-  firstName?: Maybe<Scalars['String']>;
   createdBy?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  gender?: Maybe<Gender>;
+  enabled: Scalars['Boolean'];
+  id?: Maybe<Scalars['String']>;
+  status?: Maybe<Status>;
+  firstName?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  dateOfBirth?: Maybe<Scalars['Instant']>;
+  deletedBy?: Maybe<Scalars['String']>;
+  modifiedOn?: Maybe<Scalars['Instant']>;
+  createdOn?: Maybe<Scalars['Instant']>;
+  modifiedBy?: Maybe<Scalars['String']>;
+  deletedOn?: Maybe<Scalars['Instant']>;
 };
 
 export type Change = {
@@ -263,37 +294,46 @@ export type Change = {
 
 
 export type PropertyInput = {
-  totalRooms?: Maybe<Scalars['Int']>;
-  thumbnail?: Maybe<Scalars['Base64String']>;
-  images?: Maybe<Array<Maybe<Scalars['Base64String']>>>;
-  totalBathRooms?: Maybe<Scalars['Int']>;
-  modifiedOn?: Maybe<Scalars['Instant']>;
-  modifiedBy?: Maybe<Scalars['String']>;
-  parkingAvailable: Scalars['Boolean'];
-  deletedBy?: Maybe<Scalars['String']>;
-  buildingType?: Maybe<BuildingType>;
-  address?: Maybe<AddressInput>;
-  totalFloors?: Maybe<Scalars['Int']>;
-  condition?: Maybe<Condition>;
-  createdBy?: Maybe<Scalars['String']>;
-  totalSize?: Maybe<Scalars['BigDecimal']>;
-  totalBalconies?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['String']>;
-  buildCondition?: Maybe<BuildCondition>;
-  sizeUnitOfMeasurement?: Maybe<AreaUnit>;
-  createdOn?: Maybe<Scalars['Instant']>;
-  floorNumber?: Maybe<Scalars['Int']>;
-  amenities?: Maybe<Array<Maybe<Amenities>>>;
   deletedOn?: Maybe<Scalars['Instant']>;
+  parkingAvailable: Scalars['Boolean'];
+  createdBy?: Maybe<Scalars['String']>;
+  modifiedOn?: Maybe<Scalars['Instant']>;
+  thumbnail?: Maybe<Scalars['Base64String']>;
+  condition?: Maybe<Condition>;
+  modifiedBy?: Maybe<Scalars['String']>;
+  sizeUnitOfMeasurement?: Maybe<AreaUnit>;
+  id?: Maybe<Scalars['String']>;
+  totalFloors?: Maybe<Scalars['Int']>;
+  totalBalconies?: Maybe<Scalars['Int']>;
+  floorNumber?: Maybe<Scalars['Int']>;
   parking?: Maybe<Parking>;
+  totalRooms?: Maybe<Scalars['Int']>;
+  totalSize?: Maybe<Scalars['BigDecimal']>;
+  address?: Maybe<AddressInput>;
+  deletedBy?: Maybe<Scalars['String']>;
+  amenities?: Maybe<Array<Maybe<Amenities>>>;
+  createdOn?: Maybe<Scalars['Instant']>;
+  totalBathRooms?: Maybe<Scalars['Int']>;
+  buildCondition?: Maybe<BuildCondition>;
+  buildingType?: Maybe<BuildingType>;
 };
 
-export enum Type {
-  Buy = 'Buy',
-  Rent = 'Rent',
-  Sell = 'Sell'
-}
 
+
+export type AttachmentInput = {
+  type?: Maybe<AttachmentType>;
+  name?: Maybe<Scalars['String']>;
+  deletedBy?: Maybe<Scalars['String']>;
+  deletedOn?: Maybe<Scalars['Instant']>;
+  relatedItemId?: Maybe<Scalars['String']>;
+  createdOn?: Maybe<Scalars['Instant']>;
+  metadata?: Maybe<Scalars['HashMap_String_ObjectScalar']>;
+  id?: Maybe<Scalars['String']>;
+  modifiedBy?: Maybe<Scalars['String']>;
+  modifiedOn?: Maybe<Scalars['Instant']>;
+  createdBy?: Maybe<Scalars['String']>;
+  data?: Maybe<Scalars['Base64String']>;
+};
 
 /** Mutation root */
 export type Mutation = {
@@ -302,6 +342,7 @@ export type Mutation = {
   updatePropertyThumbnail?: Maybe<Property>;
   enableUser?: Maybe<User>;
   updatePropertyAddress?: Maybe<Property>;
+  savePropertyAttachments?: Maybe<Property>;
   createProperty?: Maybe<Property>;
   createUser?: Maybe<User>;
   createOffer?: Maybe<PropertyOffer>;
@@ -332,6 +373,13 @@ export type MutationEnableUserArgs = {
 /** Mutation root */
 export type MutationUpdatePropertyAddressArgs = {
   address: AddressInput;
+  propertyId: Scalars['String'];
+};
+
+
+/** Mutation root */
+export type MutationSavePropertyAttachmentsArgs = {
+  attachments: Array<Maybe<AttachmentInput>>;
   propertyId: Scalars['String'];
 };
 

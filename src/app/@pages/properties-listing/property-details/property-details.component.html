@@ -36,7 +36,7 @@
     <div aria-label="Header Icons" class="p-sub-header" fxLayout="row wrap-around" fxLayoutAlign="space-around center">
       <div fxLayoutAlign="center center" aria-label="Offer Type">
         <mat-icon svgIcon="apartment-key"></mat-icon>
-        <span class="ml-8">{{property?.offer.type | titlecase}}</span>
+        <span class="ml-8">{{property?.offer.offerType | titlecase}}</span>
       </div>
 
       <div fxLayoutAlign="center center" aria-label="Price">
@@ -67,7 +67,7 @@
 
     </div>
 
-    <gallery [items]="images"></gallery>
+    <gallery [items]="galleryImages"></gallery>
 
     <div aria-label="Details" class="p-content">
       <div aria-label="Overview" class="mb-20">
@@ -100,7 +100,7 @@
               <mat-icon color="primary" class="mr-5">local_offer</mat-icon>
               <div>Offer</div>
               <div class="dot-div"></div>
-              <div>{{property?.offer?.type}}</div>
+              <div>{{property?.offer?.offerType}}</div>
             </div>
             <div aria-label="Build Type" fxLayout="row" fxLayoutAlign="start center" class="mb-5">
               <mat-icon color="primary" class="mr-5">apartment</mat-icon>
@@ -168,7 +168,6 @@
 
           </div>
         </div>
-<!--        <mat-divider></mat-divider>-->
       </div>
 
       <div aria-label="Amenities" class="mb-20">
